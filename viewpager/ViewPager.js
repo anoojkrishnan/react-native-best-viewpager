@@ -162,15 +162,12 @@ export default class ViewPager extends Component {
         this._scrollState = scrollState
     }
 
-    setPageWithoutAnimation(selectedPage) {
-        this.setState({ page: selectedPage })
-        if (this.props.forceScrollView || Platform.OS === 'ios')
-            this.refs[SCROLLVIEW_REF].scrollTo({ x: this.state.width * selectedPage, animated: false })
-        else {
-            this.refs[VIEWPAGER_REF].setPageWithoutAnimation(selectedPage)
-            if (this.props.onPageSelected) this.props.onPageSelected({ position: selectedPage })
+    setPageWithoutAnimation = (selectedPage: number) => {
+        if(getViewManagerConfig(VIEW_MANAGER_NAME).Commands != undefined){
+        UIManager.dispatchViewManagerCommand(ReactNative.findNodeHandle(this),getViewManagerConfig(VIEW_MANAGER_NAME).Commands.setPageWithoutAnimation,
+          [selectedPage]);
         }
-    }
+      };
 
     setPage(selectedPage) {
         this.setState({ page: selectedPage })
