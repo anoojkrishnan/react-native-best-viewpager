@@ -163,7 +163,7 @@ export default class ViewPager extends Component {
     }
 
     setPageWithoutAnimation = (selectedPage: number) => {
-        if(getViewManagerConfig(VIEW_MANAGER_NAME).Commands != undefined){
+        if(getViewManagerConfig(VIEW_MANAGER_NAME).Commands != undefined && getViewManagerConfig(VIEW_MANAGER_NAME).Commands.setPageWithoutAnimation != undefined){
         UIManager.dispatchViewManagerCommand(ReactNative.findNodeHandle(this),getViewManagerConfig(VIEW_MANAGER_NAME).Commands.setPageWithoutAnimation,
           [selectedPage]);
         }
